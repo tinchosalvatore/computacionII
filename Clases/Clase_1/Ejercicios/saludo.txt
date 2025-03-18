@@ -1,0 +1,3 @@
+Hola mundo
+
+Dejo este archivo aca porque CHAT GPT me pidio hacerlo para practicar conceptos E/S de Unix
