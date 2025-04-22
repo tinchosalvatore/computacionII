@@ -1,0 +1,8 @@
+[2025-04-22 10:44:07] [SERVICIO A] Evento número 0
+[2025-04-22 10:44:08] [SERVICIO A] Evento número 1
+[2025-04-22 10:44:09] [SERVICIO A] Evento número 2
+[2025-04-22 10:44:10] [SERVICIO A] Evento número 3
+[2025-04-22 10:44:11] [SERVICIO A] Evento número 4
+[2025-04-22 10:44:22] [SERVICIO B] Alerta crítica 0
+[2025-04-22 10:44:24] [SERVICIO B] Alerta crítica 1
+[2025-04-22 10:44:26] [SERVICIO B] Alerta crítica 2
