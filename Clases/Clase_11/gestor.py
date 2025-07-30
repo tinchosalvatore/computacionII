@@ -6,7 +6,8 @@ Escriba un script en Python llamado gestor.py que reciba argumentos desde la lí
     La opción --num indica la cantidad de procesos hijos a crear.
     La opción --verbose activa mensajes detallados.
 
-Cada proceso hijo debe dormir entre 1 y 5 segundos y luego terminar. El proceso padre debe imprimir su PID y mostrar la jerarquía de procesos usando pstree -p.
+Cada proceso hijo debe dormir entre 1 y 5 segundos y luego terminar. 
+El proceso padre debe imprimir su PID y mostrar la jerarquía de procesos usando pstree -p.
 
 Desde otra terminal, el estudiante deberá observar el estado de los procesos con ps o accediendo a /proc.
 """
@@ -17,6 +18,8 @@ import os
 import random
 import time
 
+
+
 def create_child_processes(num_processes, verbose):
     
     # Por el numero de procesos hijos a crear
@@ -26,7 +29,7 @@ def create_child_processes(num_processes, verbose):
         if pid == 0:  # Proceso hijo
             sleep_time = random.randint(5, 10)
 
-            # Si verbose es True, imprimir el PID del proceso hijo y el tiempo de sueño
+            # Imprimir el PID del proceso hijo y el tiempo de sueño
             if verbose:
                 print(f"Proceso hijo {os.getpid()} durmiendo por {sleep_time} segundos.")
             time.sleep(sleep_time)
@@ -46,6 +49,7 @@ if __name__ == "__main__":
     
     # Argmento para la cantidad de procesos hijos
     parser.add_argument("--num", type=int, required=True, help="Cantidad de procesos hijos a crear")
+    
     # Argumento para activar los mensajes detallados
     parser.add_argument("--verbose", action="store_true", help="Activar mensajes detallados")
 
