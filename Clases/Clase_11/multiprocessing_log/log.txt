@@ -1,0 +1,5 @@
+Inicio del log
+Soy el Proceso  8727, y tengo una timestamp aleatoria de 5
+Soy el Proceso  8728, y tengo una timestamp aleatoria de 2
+Soy el Proceso  8729, y tengo una timestamp aleatoria de 2
+Soy el Proceso  8730, y tengo una timestamp aleatoria de 3
