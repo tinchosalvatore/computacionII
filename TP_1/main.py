@@ -1,4 +1,3 @@
-from csv import list_dialects
 from multiprocessing import Process, Queue, Pipe
 import time
 import random
@@ -165,11 +164,37 @@ def analizar_oxigeno(queue, oxigeno_analizador):
 
 
 
-# <------------- Funciones del Proceso Verificador ----------------->
+# <------------- Funciones utilisadas por el Proceso Verificador -----------------> 
 
+def verificar_alerta(datos):
+    datos = datos["media"]
+
+
+    alerta = False
+
+    if frecuencia_media >= 200:
+        alerta = True
+    if not (90 <= oxi_media <= 100):
+        alerta = True
+    if pres_sistolica_media >= 200:
+        alerta = True
+
+# <------------- Funcion del Proceso Verificador ----------------->  
+
+# Encargada de verificar si hay alerta en los datos, y de escribir la blockchain
 def verificador(queue): 
+
     while True:
-        resultados = queue.get()
+        datos = queue.get()
+        if datos["tipo"] == "fin":
+            break
+        else:    
+            alerta = verificar_alerta(datos)    # Verificamos si hay alerta
+
+
+
+
+
 
 
 
