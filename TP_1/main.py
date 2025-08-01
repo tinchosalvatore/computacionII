@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 
 def generador_principal(freq_generador, presion_generador, oxigeno_generador):
     print("Proceso Principal generando los datos...")
+    print("Tomara aproximadamente 1 minuto")
     for i in range(60):
         # Generacion del diccionario de datos
         datos = {
@@ -27,7 +28,7 @@ def generador_principal(freq_generador, presion_generador, oxigeno_generador):
     freq_generador.send(None)
     presion_generador.send(None)
     oxigeno_generador.send(None)  
-
+    print("Generacion de datos terminada")
 
 # <------------- Funciones utilizadas por los analizadores ----------------->
 
@@ -42,69 +43,133 @@ def desviacion_estandar(lista):   # Elegi calcular la muestral insesgada
     return (sum((x - media_valor) ** 2 for x in lista) / (len(lista) - 1))** 0.5
 
 
-# Funcion encargada de validar los datos que sean de los ultimos 30s
-def datos_validos(lista):
-    timestamp_actual = datetime.now()
-    datos_aprobados = [] 
+# Funcion encargada de validar los datos que sean de la ventana de los ultimos 30s
+def validar_datos(ventana: list, ts_str: str, valor, ventana_segundoos: int = 30):  
     
-    for ts, dato in lista:
-        ts_dt = datetime.fromisoformat(ts)  # Convertimos el formato de las timestamps para calcular los tiempos
-        if (timestamp_actual - ts_dt).total_seconds() <= 30:
-            datos_aprobados.append((dato))
+# ventana es una lista de tuplas con la siguiente forma: (timestamp, valor)
+
+    ts_dt = datetime.fromisoformat(ts_str) # Convertimos la timestamp de str a datetime
+    ventana.append((ts_dt, valor))
     
-    return datos_aprobados
+    segundos = ts_dt - timedelta(seconds=ventana_segundoos) #timedelta convierte int a unidades de tiempo para operar con tiempos
+
+    while ventana and ventana[0][0] < segundos:
+        ventana.pop(0) # Con pop eliminamos los datos viejos de la lista cada vez que superamos el tiempo limite
+
+    # Filtramos los valores sacando las timestamps
+    # En el caso de la presion, hay dos valores
+    if ventana:
+        muestra = ventana[0][1]
+        if isinstance(muestra, (list, tuple)) and len(muestra) == 2:
+            sistolicas = [v[0] for _, v in ventana]
+            diastolicas = [v[1] for _, v in ventana]
+            return sistolicas, diastolicas
+    
+    # En el caso del oxigeno y la frecuencia, hay un solo valor
+    return [v for (_, v) in ventana]
 
 
 # <------------- Funciones de los Procesos Analizadores ----------------->
 
 def analizar_frecuencia(queue, freq_analizador):
-    lista = []
+    ventana = []  # Lista para los datos dentro de la ventana de tiempo  
     
+    print("Iniciando calculos para el analisis de la frecuencia")
     while True:
-        datos = freq_analizador.recv()
+        datos = freq_analizador.recv()  # recibimos los datos por pipe
         if datos is None:
             break
-        lista.append((datos["timestamp"], datos["frecuencia"]))
+        ts = datos["timestamp"]
+        frecuencia = datos["frecuencia"]
         
+        # Evaluamos la ventana de los ultimo 30 segundos por cada iteracion y calculamos sus estadisticos muestrales
+        frecuencias = validar_datos(ventana, ts, frecuencia)
 
-    frecuencias = datos_validos(lista)    
+        media_frecuencia = media(frecuencias)
+        desviacion_frecuencia = desviacion_estandar(frecuencias)
 
-    media_frecuencia = media(frecuencias)
-    desviacion_frecuencia = desviacion_estandar(frecuencias)
+        # Enviamos los resultados a la queue para el Verificador
+        resultados = {
+            "tipo": "frecuencia",
+            "timestamp": ts,
+            "media": media_frecuencia,
+            "desviacion": desviacion_frecuencia
+        }
+        queue.put(resultados)
+    # Señal de fin
+    queue.put({"tipo": "fin", "origen": "frecuencia"})
+    print("Fin de calculos para el analisis de la frecuencia")
+
+
 
 
 def analizar_presion(queue, presion_analizador):
-    lista = []
+    ventana = []
     
+    print("Iniciando calculos para el analisis de la presion")
     while True:
         datos = presion_analizador.recv()
         if datos is None:
             break
-        lista.append((datos["timestamp"], datos["presion"]))
+        ts = datos["timestamp"]
+        presion = datos["presion"]
+
+        sistolicas, diastolicas = validar_datos(ventana, ts, presion)
+
+        media_sistolicas = media(sistolicas)
+        desviacion_sistolicas = desviacion_estandar(sistolicas)
+
+        media_diastolicas = media(diastolicas)
+        desviacion_diastolicas = desviacion_estandar(diastolicas)
         
+        resultados = {
+          "tipo": "presion",
+          "timestamp": ts,
+          "media": {"sistolica": media_sistolicas, "diastolica": media_diastolicas},
+          "desv": {"sistolica": desviacion_sistolicas, "diastolica": desviacion_diastolicas}
+        }
 
-    presiones = datos_validos(lista)
+        queue.put(resultados)
+    
+    queue.put({"tipo": "fin", "origen": "presion"})
+    print("Fin de los calculos para el analisis de la presion")  
 
-    media_presion = media(presiones)
-    desviacion_presion = desviacion_estandar(presiones)
 
 
 def analizar_oxigeno(queue, oxigeno_analizador):
-    lista = []
+    ventana = []
 
+    print("Iniciando calculos para el analisis de oxigeno")
     while True:
         datos = oxigeno_analizador.recv()
         if datos is None:
             break
-        lista.append((datos["timestamp"], datos["oxigeno"]))
+        ts = datos["timestamp"]
+        oxigeno = datos["oxigeno"]
+
+        oxigenos = validar_datos(ventana, ts, oxigeno)
+
+        media_oxigeno = media(oxigenos)
+        desviacion_oxigeno = desviacion_estandar(oxigenos)
+
+        resultados = {
+            "tipo": "oxigeno",
+            "timestamp": ts,
+            "media": media_oxigeno,
+            "desviacion": desviacion_oxigeno
+        }
+        queue.put(resultados)
+
+    queue.put({"tipo": "fin", "origen": "oxigeno"})
+    print("Fin de los calculos para el analisis de oxigeno")
 
 
 
-    oxigenos = datos_validos(lista)
+# <------------- Funciones del Proceso Verificador ----------------->
 
-    media_oxigeno = media(oxigenos)
-    desviacion_oxigeno = desviacion_estandar(oxigenos)
-
+def verificador(queue): 
+    while True:
+        resultados = queue.get()
 
 
 
@@ -114,10 +179,10 @@ def analizar_oxigeno(queue, oxigeno_analizador):
 def main():
     queue = Queue()
 
-# Definimos los extremos de las pipes
-    freq_generador, freq_analizador = Pipe(duplex=False)   # Duplex False significa que son unidireccionales
-    presion_generador, presion_analizador = Pipe(duplex=False)
-    oxigeno_generador, oxigeno_analizador = Pipe(duplex=False)
+# Definimos los extremos de las pipes, el primero es read y el segundo es write (receive y send)
+    freq_analizador, freq_generador = Pipe(duplex=False)   # Duplex False significa que son unidireccionales
+    presion_analizador, presion_generador = Pipe(duplex=False)
+    oxigeno_analizador, oxigeno_generador = Pipe(duplex=False)
 
 
     # Vamos a almacenar los procesos para luego poder terminarlos
@@ -142,3 +207,17 @@ def main():
     p_B.start()
     p_C.start()
 
+    # Proceso Verificador
+    p_Verificador = Process(target=verificador, args=(queue,))
+    procesos.append(p_Verificador)
+    p_Verificador.start()
+
+
+    # Nos aseguramos de que todos los procesos terminen
+    for p in procesos:
+        p.join()
+
+
+
+if __name__ == "__main__":
+    main()
