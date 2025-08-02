@@ -2,6 +2,10 @@ from multiprocessing import Process, Queue, Pipe
 import time
 import random
 from datetime import datetime, timedelta
+import os
+# Imports para el blockchain
+import json
+import hashlib
 
 
 # <------------- Funcion del Proceso Principal ----------------->
@@ -163,40 +167,111 @@ def analizar_oxigeno(queue, oxigeno_analizador):
     print("Fin de los calculos para el analisis de oxigeno")
 
 
-
 # <------------- Funciones utilisadas por el Proceso Verificador -----------------> 
 
-def verificar_alerta(datos):
-    datos = datos["media"]
+# Extrae las medias de los diccionarios de entrada
+def extraer_medias(grupo):
+    frecuencia_media = grupo["frecuencia"]["media"]
+    oxigeno_media = grupo["oxigeno"]["media"]
+    sistolica_media = grupo["presion"]["media"]["sistolica"]  # solo sistólica
 
+    return frecuencia_media, oxigeno_media, sistolica_media
 
-    alerta = False
+# Usa extraer_medias para evaluar si hay alerta con ellas
+def evaluar_alerta(grupo):
+    frecuencia_media, oxigeno_media, sistolica_media = extraer_medias(grupo)
 
     if frecuencia_media >= 200:
-        alerta = True
-    if not (90 <= oxi_media <= 100):
-        alerta = True
-    if pres_sistolica_media >= 200:
-        alerta = True
+        return True
+    if not (90 <= oxigeno_media <= 100):
+        return True
+    if sistolica_media >= 200:
+        return True
+    return False
+
+# <------------- Funciones relacionadas con la construccion de la blockchain ----------------->  
+
 
 # <------------- Funcion del Proceso Verificador ----------------->  
 
 # Encargada de verificar si hay alerta en los datos, y de escribir la blockchain
-def verificador(queue): 
+def verificador(queue, blockchain_path):
+    buffer = {}  # Para agrupar los datos por timestamp 
+    finishes = set()  # Vamos a usarlo para confirmar que todos los procesos han terminado
+    
+    chain = []
+    prev_hash = "0" * 64  # genesis
+
 
     while True:
-        datos = queue.get()
+        datos = queue.get()  
+
+    # Este bloque se encarga de verificar la llegada del "fin" de cada medicion para medir el fin de la queue
         if datos["tipo"] == "fin":
-            break
-        else:    
-            alerta = verificar_alerta(datos)    # Verificamos si hay alerta
+            finishes.add(datos["origen"])
+            # Si llego el "fin" de todos las mediciones que evaluamos, rompemos el bucle 
+            if finishes == {"frecuencia", "presion", "oxigeno"}:    
+                break
+            continue # Aun no se coleccionario todos los "fin", asi que continuamos la iteracion
+
+        ts = datos["timestamp"]
+        tipo = datos["tipo"]
+
+        # Este bloque de codigo junta los datos por timestamp
+        buffer.setdefault(ts, {})[tipo] = datos # Creamos un sub-diccionario para cada timestamp
+
+        if all(k in buffer[ts] for k in ("frecuencia", "presion", "oxigeno")): # Verifica si las ts tienen los 3 datos 
+            grupo = buffer.pop(ts)  # Junta los tres datos con el ts
+            alerta = evaluar_alerta(grupo)
+            if alerta:
+                print(f"Alerta detectada en {ts}")  # Debuggin, no se producen porque los datos no pueden dar alerta
+
+            # Armado del campo "datos"
+            datos = {
+                "frecuencia": {
+                    "media": grupo["frecuencia"]["media"],
+                    "desv": grupo["frecuencia"]["desviacion"]
+                },
+                "presion": {
+                    "media": {
+                        "sistolica": grupo["presion"]["media"]["sistolica"],
+                        "diastolica": grupo["presion"]["media"]["diastolica"]
+                    },
+                    "desv": {
+                        "sistolica": grupo["presion"]["desv"]["sistolica"],
+                        "diastolica": grupo["presion"]["desv"]["diastolica"]
+                    }
+                },
+                "oxigeno": {
+                    "media": grupo["oxigeno"]["media"],
+                    "desv": grupo["oxigeno"]["desviacion"]
+                }
+            }
+
+            # Construcción del bloque
+            bloque = {
+                "timestamp": ts,
+                "datos": datos,
+                "alerta": alerta,
+                "prev_hash": prev_hash  # hash de la cadena anterior
+            }
+
+                            # Hash determinista
+            # Convertimos el diccionario a string de .json
+            datos_serializados = json.dumps(datos, sort_keys=True, separators=(",", ":")) 
+            to_hash = prev_hash + datos_serializados + ts     # Calcula la base del hash, aun no hasheado
+            hash_actual = hashlib.sha256(to_hash.encode()).hexdigest()   # Hasheamos la base que construimos
+            bloque["hash"] = hash_actual  # Añadimos el hash al bloque
 
 
+            # Encadenar en memoria
+            chain.append(bloque)
+            prev_hash = hash_actual  # actualizo para el siguiente bloque
 
-
-
-
-
+            # Ultimo requisito del 
+            indice = len(chain) - 1
+            print(f"Bloque {indice}: hash={hash_actual} alerta={alerta}")
+    
 
 
 # <------------- Funcion Main del programa ----------------->
@@ -233,7 +308,8 @@ def main():
     p_C.start()
 
     # Proceso Verificador
-    p_Verificador = Process(target=verificador, args=(queue,))
+    blockchain_path = "blockchain.json"  
+    p_Verificador = Process(target=verificador, args=(queue, blockchain_path))
     procesos.append(p_Verificador)
     p_Verificador.start()
 
