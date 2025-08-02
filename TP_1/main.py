@@ -167,7 +167,7 @@ def analizar_oxigeno(queue, oxigeno_analizador):
     print("Fin de los calculos para el analisis de oxigeno")
 
 
-# <------------- Funciones utilisadas por el Proceso Verificador -----------------> 
+# <------------- Funciones utilizadas por el Proceso Verificador -----------------> 
 
 # Extrae las medias de los diccionarios de entrada
 def extraer_medias(grupo):
@@ -191,6 +191,24 @@ def evaluar_alerta(grupo):
 
 # <------------- Funciones relacionadas con la construccion de la blockchain ----------------->  
 
+# Recupera la ultima blockchain escrita en el archivo para continuar escribiendo desde ahi
+def cargar_cadena(path):
+    if os.path.exists(path):
+        try:
+            with open(path, "r") as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):   # EXTRA: Si la ultima blockchain esta corrupta, empieza desde cero
+            return []
+    return []
+
+# Escribe la blockchain en el archivo de forma "atomica"
+def escribir_cadena_atomicamente(chain, path):
+    temp = path + ".tmp"  # Creamos un archivo temporal que usaremos como puente para reemplazar el original
+    with open(temp, "w") as f:
+        json.dump(chain, f, indent=2)   
+        f.flush()   # Forzamos la escritura en el archivo
+        os.fsync(f.fileno())
+    os.replace(temp, path)    # Reemplazamos el archivo
 
 # <------------- Funcion del Proceso Verificador ----------------->  
 
@@ -198,10 +216,17 @@ def evaluar_alerta(grupo):
 def verificador(queue, blockchain_path):
     buffer = {}  # Para agrupar los datos por timestamp 
     finishes = set()  # Vamos a usarlo para confirmar que todos los procesos han terminado
-    
-    chain = []
-    prev_hash = "0" * 64  # genesis
 
+
+# Cargar cadena previa (si existe) y establecer prev_hash
+    chain = cargar_cadena(blockchain_path)
+    if chain:
+        prev_hash = chain[-1]["hash"]
+    else:
+        prev_hash = "0" * 64  # inicio de la cadena si no hay nada
+
+    # Si no había cadena, la dejamos lista para agregar el primer bloque
+    escribir_cadena_atomicamente(chain, blockchain_path)
 
     while True:
         datos = queue.get()  
@@ -227,7 +252,7 @@ def verificador(queue, blockchain_path):
                 print(f"Alerta detectada en {ts}")  # Debuggin, no se producen porque los datos no pueden dar alerta
 
             # Armado del campo "datos"
-            datos = {
+            datos_bloque = {
                 "frecuencia": {
                     "media": grupo["frecuencia"]["media"],
                     "desv": grupo["frecuencia"]["desviacion"]
@@ -251,14 +276,14 @@ def verificador(queue, blockchain_path):
             # Construcción del bloque
             bloque = {
                 "timestamp": ts,
-                "datos": datos,
+                "datos": datos_bloque,
                 "alerta": alerta,
                 "prev_hash": prev_hash  # hash de la cadena anterior
             }
 
                             # Hash determinista
             # Convertimos el diccionario a string de .json
-            datos_serializados = json.dumps(datos, sort_keys=True, separators=(",", ":")) 
+            datos_serializados = json.dumps(datos_bloque, sort_keys=True, separators=(",", ":")) 
             to_hash = prev_hash + datos_serializados + ts     # Calcula la base del hash, aun no hasheado
             hash_actual = hashlib.sha256(to_hash.encode()).hexdigest()   # Hasheamos la base que construimos
             bloque["hash"] = hash_actual  # Añadimos el hash al bloque
@@ -267,6 +292,7 @@ def verificador(queue, blockchain_path):
             # Encadenar en memoria
             chain.append(bloque)
             prev_hash = hash_actual  # actualizo para el siguiente bloque
+            escribir_cadena_atomicamente(chain, blockchain_path)
 
             # Ultimo requisito del 
             indice = len(chain) - 1
