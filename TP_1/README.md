@@ -61,7 +61,7 @@ nano reporte.txt
 ```
 ---
 
-### :alarm: Criterios de alerta de salud :alarm:
+### :rotating_light: Criterios de alerta de salud :rotating_light:
 
 Un bloque se marca con "alerta": true si se incumple alguno de:
 
@@ -114,7 +114,7 @@ Promedios (solo bloques íntegros):
   Presión diastólica: 89.10
 ```
 ---
-## :lightning: Ejecucion rapida recomendada :lightning:
+## :zap: Ejecucion rapida recomendada :zap: 
 ```bash
 python3 main.py
 python3 verificar.py
