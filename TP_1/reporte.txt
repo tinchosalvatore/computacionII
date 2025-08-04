@@ -1,0 +1,9 @@
+Total de bloques: 60
+Bloques con alerta (válidos): 0
+Bloques corruptos: 0
+
+Promedios (solo bloques íntegros):
+  Frecuencia: 126.43
+  Oxígeno: 94.14
+  Presión sistólica: 147.80
+  Presión diastólica: 86.68

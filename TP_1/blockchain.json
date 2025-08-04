@@ -1,0 +1,1562 @@
+[
+  {
+    "timestamp": "2025-08-03T21:19:11.769555",
+    "datos": {
+      "frecuencia": {
+        "media": 124.0,
+        "desv": 0
+      },
+      "presion": {
+        "media": {
+          "sistolica": 180.0,
+          "diastolica": 73.0
+        },
+        "desv": {
+          "sistolica": 0,
+          "diastolica": 0
+        }
+      },
+      "oxigeno": {
+        "media": 90.0,
+        "desv": 0
+      }
+    },
+    "alerta": false,
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash": "3e168457304f11efa7bac3c2d51f03bd7ae9a5253e370b3a43a5c49cfbeca60f"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:12.770014",
+    "datos": {
+      "frecuencia": {
+        "media": 124.0,
+        "desv": 0.0
+      },
+      "presion": {
+        "media": {
+          "sistolica": 157.0,
+          "diastolica": 72.5
+        },
+        "desv": {
+          "sistolica": 32.526911934581186,
+          "diastolica": 0.7071067811865476
+        }
+      },
+      "oxigeno": {
+        "media": 90.0,
+        "desv": 0.0
+      }
+    },
+    "alerta": false,
+    "prev_hash": "3e168457304f11efa7bac3c2d51f03bd7ae9a5253e370b3a43a5c49cfbeca60f",
+    "hash": "db790f7853d7f6a98dd6335518e1465f226cab53f9d259ce96671eceb3a48e4c"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:13.770350",
+    "datos": {
+      "frecuencia": {
+        "media": 133.33333333333334,
+        "desv": 16.165807537309522
+      },
+      "presion": {
+        "media": {
+          "sistolica": 161.66666666666666,
+          "diastolica": 77.0
+        },
+        "desv": {
+          "sistolica": 24.37895267096873,
+          "diastolica": 7.810249675906654
+        }
+      },
+      "oxigeno": {
+        "media": 90.33333333333333,
+        "desv": 0.5773502691896257
+      }
+    },
+    "alerta": false,
+    "prev_hash": "db790f7853d7f6a98dd6335518e1465f226cab53f9d259ce96671eceb3a48e4c",
+    "hash": "99ae13a13394ee1f78f39120c6a355b8022032384f80420af62d9f359f8f139d"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:14.770710",
+    "datos": {
+      "frecuencia": {
+        "media": 141.25,
+        "desv": 20.61350689879494
+      },
+      "presion": {
+        "media": {
+          "sistolica": 154.0,
+          "diastolica": 79.25
+        },
+        "desv": {
+          "sistolica": 25.126347393390336,
+          "diastolica": 7.804912982645397
+        }
+      },
+      "oxigeno": {
+        "media": 90.5,
+        "desv": 0.5773502691896257
+      }
+    },
+    "alerta": false,
+    "prev_hash": "99ae13a13394ee1f78f39120c6a355b8022032384f80420af62d9f359f8f139d",
+    "hash": "ca7ca5392b7c10f121abd9e190970e6980fea87d6ae47d834fc5ef0e3c5d04ca"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:15.771245",
+    "datos": {
+      "frecuencia": {
+        "media": 133.6,
+        "desv": 24.7244817943673
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.6,
+          "diastolica": 81.8
+        },
+        "desv": {
+          "sistolica": 28.745434420095307,
+          "diastolica": 8.843076387773658
+        }
+      },
+      "oxigeno": {
+        "media": 92.2,
+        "desv": 3.8340579025361627
+      }
+    },
+    "alerta": false,
+    "prev_hash": "ca7ca5392b7c10f121abd9e190970e6980fea87d6ae47d834fc5ef0e3c5d04ca",
+    "hash": "8fc36c154b3a2520bb54ea61f26e869d5f64b3eb29a7bb207a10ec563d1604b3"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:16.771578",
+    "datos": {
+      "frecuencia": {
+        "media": 133.5,
+        "desv": 22.115605350068986
+      },
+      "presion": {
+        "media": {
+          "sistolica": 148.16666666666666,
+          "diastolica": 80.5
+        },
+        "desv": {
+          "sistolica": 26.468219937628348,
+          "diastolica": 8.526429498916883
+        }
+      },
+      "oxigeno": {
+        "media": 93.33333333333333,
+        "desv": 4.412104562073146
+      }
+    },
+    "alerta": false,
+    "prev_hash": "8fc36c154b3a2520bb54ea61f26e869d5f64b3eb29a7bb207a10ec563d1604b3",
+    "hash": "f1d880c8661de9553b357568d93ae41c984cd2d401959d11dcb8f4369c75a1c8"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:17.771935",
+    "datos": {
+      "frecuencia": {
+        "media": 124.28571428571429,
+        "desv": 31.652879204027585
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.0,
+          "diastolica": 82.42857142857143
+        },
+        "desv": {
+          "sistolica": 24.8327740429189,
+          "diastolica": 9.30693545798227
+        }
+      },
+      "oxigeno": {
+        "media": 93.57142857142857,
+        "desv": 4.07664661444276
+      }
+    },
+    "alerta": false,
+    "prev_hash": "f1d880c8661de9553b357568d93ae41c984cd2d401959d11dcb8f4369c75a1c8",
+    "hash": "75cebbda4ac282ecf7922242a6780befd727199a57dd24d2d838d7789c4444ad"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:18.772265",
+    "datos": {
+      "frecuencia": {
+        "media": 131.0,
+        "desv": 34.92031745887444
+      },
+      "presion": {
+        "media": {
+          "sistolica": 149.875,
+          "diastolica": 82.375
+        },
+        "desv": {
+          "sistolica": 25.469519598363622,
+          "diastolica": 8.617880084037903
+        }
+      },
+      "oxigeno": {
+        "media": 93.25,
+        "desv": 3.882193783343198
+      }
+    },
+    "alerta": false,
+    "prev_hash": "75cebbda4ac282ecf7922242a6780befd727199a57dd24d2d838d7789c4444ad",
+    "hash": "61fa48fdebaa722087eed84cc60503e5d8d3d1543d8ed45145b5115ccc249a02"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:19.772598",
+    "datos": {
+      "frecuencia": {
+        "media": 126.11111111111111,
+        "desv": 35.8065791595778
+      },
+      "presion": {
+        "media": {
+          "sistolica": 148.77777777777777,
+          "diastolica": 82.88888888888889
+        },
+        "desv": {
+          "sistolica": 24.050872010063262,
+          "diastolica": 8.207381501496753
+        }
+      },
+      "oxigeno": {
+        "media": 93.77777777777777,
+        "desv": 3.9616214413349042
+      }
+    },
+    "alerta": false,
+    "prev_hash": "61fa48fdebaa722087eed84cc60503e5d8d3d1543d8ed45145b5115ccc249a02",
+    "hash": "2f5f4c20b48b78132006d20a1fb1c118a311a9e75d0f074a5553cbc3a724e87b"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:20.773013",
+    "datos": {
+      "frecuencia": {
+        "media": 129.5,
+        "desv": 35.41892149684968
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.4,
+          "diastolica": 83.0
+        },
+        "desv": {
+          "sistolica": 25.06524818681568,
+          "diastolica": 7.745966692414834
+        }
+      },
+      "oxigeno": {
+        "media": 93.5,
+        "desv": 3.8369548110737792
+      }
+    },
+    "alerta": false,
+    "prev_hash": "2f5f4c20b48b78132006d20a1fb1c118a311a9e75d0f074a5553cbc3a724e87b",
+    "hash": "55df1e076bcd664bdbc9a6872aed7a75d56015ce91e94b7bbccf3e81e6d3b14a"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:21.773342",
+    "datos": {
+      "frecuencia": {
+        "media": 128.36363636363637,
+        "desv": 33.8120473419541
+      },
+      "presion": {
+        "media": {
+          "sistolica": 148.54545454545453,
+          "diastolica": 82.45454545454545
+        },
+        "desv": {
+          "sistolica": 25.966761971272568,
+          "diastolica": 7.567874686642695
+        }
+      },
+      "oxigeno": {
+        "media": 93.45454545454545,
+        "desv": 3.643175438093432
+      }
+    },
+    "alerta": false,
+    "prev_hash": "55df1e076bcd664bdbc9a6872aed7a75d56015ce91e94b7bbccf3e81e6d3b14a",
+    "hash": "b0e510ac01d5d57cf27876fd332a365eb5519221ae691c87c7ac81d0e6f95799"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:22.773677",
+    "datos": {
+      "frecuencia": {
+        "media": 123.75,
+        "desv": 35.98263470064414
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.66666666666666,
+          "diastolica": 82.91666666666667
+        },
+        "desv": {
+          "sistolica": 26.691276522943642,
+          "diastolica": 7.391128998927558
+        }
+      },
+      "oxigeno": {
+        "media": 93.5,
+        "desv": 3.4771984543464143
+      }
+    },
+    "alerta": false,
+    "prev_hash": "b0e510ac01d5d57cf27876fd332a365eb5519221ae691c87c7ac81d0e6f95799",
+    "hash": "ef47fcdb15096868abc74f180824c5bc7f158bedb9b961d7b0280b288f86ba58"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:23.774181",
+    "datos": {
+      "frecuencia": {
+        "media": 127.0,
+        "desv": 36.38910093237626
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.84615384615384,
+          "diastolica": 84.53846153846153
+        },
+        "desv": {
+          "sistolica": 25.563144543939796,
+          "diastolica": 9.179827382322108
+        }
+      },
+      "oxigeno": {
+        "media": 93.23076923076923,
+        "desv": 3.4678006035008737
+      }
+    },
+    "alerta": false,
+    "prev_hash": "ef47fcdb15096868abc74f180824c5bc7f158bedb9b961d7b0280b288f86ba58",
+    "hash": "f3aba3bdca0a264628ae3e01e1838da023516260e03e1830426273b8df482568"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:24.774516",
+    "datos": {
+      "frecuencia": {
+        "media": 127.0,
+        "desv": 34.96151730557031
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.5,
+          "diastolica": 85.28571428571429
+        },
+        "desv": {
+          "sistolica": 24.59440211480278,
+          "diastolica": 9.25226435011428
+        }
+      },
+      "oxigeno": {
+        "media": 93.21428571428571,
+        "desv": 3.332325855074141
+      }
+    },
+    "alerta": false,
+    "prev_hash": "f3aba3bdca0a264628ae3e01e1838da023516260e03e1830426273b8df482568",
+    "hash": "62c2082bf1af5effb9f4b60ae85ebacf53b88adf02154b25cdb3dc50faf0d5d0"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:25.774843",
+    "datos": {
+      "frecuencia": {
+        "media": 126.6,
+        "desv": 33.72536137686296
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.4,
+          "diastolica": 85.8
+        },
+        "desv": {
+          "sistolica": 23.954719189098657,
+          "diastolica": 9.135488101746008
+        }
+      },
+      "oxigeno": {
+        "media": 93.4,
+        "desv": 3.290679478249352
+      }
+    },
+    "alerta": false,
+    "prev_hash": "62c2082bf1af5effb9f4b60ae85ebacf53b88adf02154b25cdb3dc50faf0d5d0",
+    "hash": "9b53514459f9d25f0efb605733de3470b604fc5747f276706be35521a0e12f23"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:26.775179",
+    "datos": {
+      "frecuencia": {
+        "media": 124.9375,
+        "desv": 33.25350858681431
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.3125,
+          "diastolica": 85.0625
+        },
+        "desv": {
+          "sistolica": 23.14510387389379,
+          "diastolica": 9.305688224593242
+        }
+      },
+      "oxigeno": {
+        "media": 93.25,
+        "desv": 3.235222815613581
+      }
+    },
+    "alerta": false,
+    "prev_hash": "9b53514459f9d25f0efb605733de3470b604fc5747f276706be35521a0e12f23",
+    "hash": "39db665d5ec71b92d41c239a63414ba09ebbee9e59c3b00d943be3cd8c51de6f"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:27.775508",
+    "datos": {
+      "frecuencia": {
+        "media": 127.70588235294117,
+        "desv": 34.16095121970836
+      },
+      "presion": {
+        "media": {
+          "sistolica": 144.94117647058823,
+          "diastolica": 86.05882352941177
+        },
+        "desv": {
+          "sistolica": 23.11241708539831,
+          "diastolica": 9.902465527807292
+        }
+      },
+      "oxigeno": {
+        "media": 93.58823529411765,
+        "desv": 3.4288996691615914
+      }
+    },
+    "alerta": false,
+    "prev_hash": "39db665d5ec71b92d41c239a63414ba09ebbee9e59c3b00d943be3cd8c51de6f",
+    "hash": "988607f4e49106719d2b783b4a27ae688b886ffa6f3ddb70a574217c4f00df57"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:28.775819",
+    "datos": {
+      "frecuencia": {
+        "media": 130.5,
+        "desv": 35.197342814145365
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.5,
+          "diastolica": 85.33333333333333
+        },
+        "desv": {
+          "sistolica": 23.37733945512192,
+          "diastolica": 10.08784941810458
+        }
+      },
+      "oxigeno": {
+        "media": 93.88888888888889,
+        "desv": 3.5626970763055814
+      }
+    },
+    "alerta": false,
+    "prev_hash": "988607f4e49106719d2b783b4a27ae688b886ffa6f3ddb70a574217c4f00df57",
+    "hash": "c5ec2171ede79e3a8b388e0df423dda288858bbd7b66dc947505edaa3a2d8fdd"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:29.776157",
+    "datos": {
+      "frecuencia": {
+        "media": 131.0,
+        "desv": 34.27503140447544
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.42105263157896,
+          "diastolica": 84.94736842105263
+        },
+        "desv": {
+          "sistolica": 23.200373056085123,
+          "diastolica": 9.946935229900527
+        }
+      },
+      "oxigeno": {
+        "media": 93.73684210526316,
+        "desv": 3.5251809293701966
+      }
+    },
+    "alerta": false,
+    "prev_hash": "c5ec2171ede79e3a8b388e0df423dda288858bbd7b66dc947505edaa3a2d8fdd",
+    "hash": "892464f57f0e5e9c77a3c4886bc7316379ac4cc3cadd3b9ce556643909398c73"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:30.776495",
+    "datos": {
+      "frecuencia": {
+        "media": 131.85,
+        "desv": 33.576738501841604
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.8,
+          "diastolica": 86.05
+        },
+        "desv": {
+          "sistolica": 22.645087767549057,
+          "diastolica": 10.865081684000355
+        }
+      },
+      "oxigeno": {
+        "media": 93.9,
+        "desv": 3.5078858530309587
+      }
+    },
+    "alerta": false,
+    "prev_hash": "892464f57f0e5e9c77a3c4886bc7316379ac4cc3cadd3b9ce556643909398c73",
+    "hash": "23e5a2a03a53e28927230944b68fdc6873da69affb9398154c687ee55eddabf2"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:31.776828",
+    "datos": {
+      "frecuencia": {
+        "media": 128.95238095238096,
+        "desv": 35.3178088086962
+      },
+      "presion": {
+        "media": {
+          "sistolica": 144.28571428571428,
+          "diastolica": 86.80952380952381
+        },
+        "desv": {
+          "sistolica": 23.136859893129095,
+          "diastolica": 11.147282393565922
+        }
+      },
+      "oxigeno": {
+        "media": 94.0,
+        "desv": 3.449637662132068
+      }
+    },
+    "alerta": false,
+    "prev_hash": "23e5a2a03a53e28927230944b68fdc6873da69affb9398154c687ee55eddabf2",
+    "hash": "9cd695794f8b2588a27202208ad598ff082496d97571e6a6ae0aced1b521f41f"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:32.777166",
+    "datos": {
+      "frecuencia": {
+        "media": 127.5909090909091,
+        "desv": 35.05323718616352
+      },
+      "presion": {
+        "media": {
+          "sistolica": 144.54545454545453,
+          "diastolica": 86.0909090909091
+        },
+        "desv": {
+          "sistolica": 22.612106476561607,
+          "diastolica": 11.388837855796687
+        }
+      },
+      "oxigeno": {
+        "media": 94.27272727272727,
+        "desv": 3.60134654951408
+      }
+    },
+    "alerta": false,
+    "prev_hash": "9cd695794f8b2588a27202208ad598ff082496d97571e6a6ae0aced1b521f41f",
+    "hash": "0539c3a7a3a1528836b147c163639ce9a98ca8f4f3913d87af9559b895493b9a"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:33.777502",
+    "datos": {
+      "frecuencia": {
+        "media": 129.47826086956522,
+        "desv": 35.42324553327479
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.3913043478261,
+          "diastolica": 86.6086956521739
+        },
+        "desv": {
+          "sistolica": 22.461561368935037,
+          "diastolica": 11.400714213810476
+        }
+      },
+      "oxigeno": {
+        "media": 94.43478260869566,
+        "desv": 3.603358117550927
+      }
+    },
+    "alerta": false,
+    "prev_hash": "0539c3a7a3a1528836b147c163639ce9a98ca8f4f3913d87af9559b895493b9a",
+    "hash": "3511a5b375b1d4acce3511f4627a98f4f82728987384ccb237dca85c700b118d"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:34.777819",
+    "datos": {
+      "frecuencia": {
+        "media": 130.375,
+        "desv": 34.92204050515202
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.08333333333334,
+          "diastolica": 86.5
+        },
+        "desv": {
+          "sistolica": 22.227903863048525,
+          "diastolica": 11.162826508200059
+        }
+      },
+      "oxigeno": {
+        "media": 94.41666666666667,
+        "desv": 3.525271086297344
+      }
+    },
+    "alerta": false,
+    "prev_hash": "3511a5b375b1d4acce3511f4627a98f4f82728987384ccb237dca85c700b118d",
+    "hash": "45c6dec482eb5861706017c1275ec90c3f382e66b0ff11536f7e7c7b56fe87af"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:35.778138",
+    "datos": {
+      "frecuencia": {
+        "media": 128.4,
+        "desv": 35.58440669731617
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.08,
+          "diastolica": 87.16
+        },
+        "desv": {
+          "sistolica": 22.330696361734894,
+          "diastolica": 11.415194552291549
+        }
+      },
+      "oxigeno": {
+        "media": 94.44,
+        "desv": 3.453018003621373
+      }
+    },
+    "alerta": false,
+    "prev_hash": "45c6dec482eb5861706017c1275ec90c3f382e66b0ff11536f7e7c7b56fe87af",
+    "hash": "6c9971aa51dcfab7c5272222fd501a79949ff65ae69599d3c2716f433a053419"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:36.778466",
+    "datos": {
+      "frecuencia": {
+        "media": 127.15384615384616,
+        "desv": 35.43974301000763
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.15384615384616,
+          "diastolica": 86.57692307692308
+        },
+        "desv": {
+          "sistolica": 22.55427641524739,
+          "diastolica": 11.572979139091462
+        }
+      },
+      "oxigeno": {
+        "media": 94.46153846153847,
+        "desv": 3.385034939031138
+      }
+    },
+    "alerta": false,
+    "prev_hash": "6c9971aa51dcfab7c5272222fd501a79949ff65ae69599d3c2716f433a053419",
+    "hash": "c2fe15f87f5b9c0bf1dbc3dc452962a9b13286daf69a3cd5c2ea99f690d57c0b"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:37.778801",
+    "datos": {
+      "frecuencia": {
+        "media": 128.22222222222223,
+        "desv": 35.19214655981046
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.4814814814815,
+          "diastolica": 87.14814814814815
+        },
+        "desv": {
+          "sistolica": 22.390537785774203,
+          "diastolica": 11.729986896522629
+        }
+      },
+      "oxigeno": {
+        "media": 94.62962962962963,
+        "desv": 3.4322917679921647
+      }
+    },
+    "alerta": false,
+    "prev_hash": "c2fe15f87f5b9c0bf1dbc3dc452962a9b13286daf69a3cd5c2ea99f690d57c0b",
+    "hash": "e0835b615d5584d76336c3f4072eec4f8520666dbbe99f940284710f3fc78d3e"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:38.779115",
+    "datos": {
+      "frecuencia": {
+        "media": 126.46428571428571,
+        "desv": 35.76516217489899
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.64285714285714,
+          "diastolica": 87.0
+        },
+        "desv": {
+          "sistolica": 21.988573271073193,
+          "diastolica": 11.53737886658452
+        }
+      },
+      "oxigeno": {
+        "media": 94.60714285714286,
+        "desv": 3.3702322781175793
+      }
+    },
+    "alerta": false,
+    "prev_hash": "e0835b615d5584d76336c3f4072eec4f8520666dbbe99f940284710f3fc78d3e",
+    "hash": "ce4a718efd446b51e6db9e0d763b63d67e69176cc9a5f0c936e3b03a6ff3130d"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:39.779452",
+    "datos": {
+      "frecuencia": {
+        "media": 127.86206896551724,
+        "desv": 35.918284378702715
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.6206896551724,
+          "diastolica": 87.51724137931035
+        },
+        "desv": {
+          "sistolica": 22.225168797532625,
+          "diastolica": 11.666866055063718
+        }
+      },
+      "oxigeno": {
+        "media": 94.44827586206897,
+        "desv": 3.4182932969596695
+      }
+    },
+    "alerta": false,
+    "prev_hash": "ce4a718efd446b51e6db9e0d763b63d67e69176cc9a5f0c936e3b03a6ff3130d",
+    "hash": "083765849eecca0127831c1add0c96c488351be90314b714829ec7b232dacfbf"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:40.779787",
+    "datos": {
+      "frecuencia": {
+        "media": 126.56666666666666,
+        "desv": 35.99969667816022
+      },
+      "presion": {
+        "media": {
+          "sistolica": 147.3,
+          "diastolica": 87.6
+        },
+        "desv": {
+          "sistolica": 22.15330597263626,
+          "diastolica": 11.472906615452622
+        }
+      },
+      "oxigeno": {
+        "media": 94.46666666666667,
+        "desv": 3.3603502827813214
+      }
+    },
+    "alerta": false,
+    "prev_hash": "083765849eecca0127831c1add0c96c488351be90314b714829ec7b232dacfbf",
+    "hash": "195287a0e02d62a8e1153ecc5edf9bb632198178210878dad663f2bc15f593c6"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:41.780119",
+    "datos": {
+      "frecuencia": {
+        "media": 125.13333333333334,
+        "desv": 36.948924050718276
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.93333333333334,
+          "diastolica": 87.73333333333333
+        },
+        "desv": {
+          "sistolica": 21.315258147276975,
+          "diastolica": 11.319599521773434
+        }
+      },
+      "oxigeno": {
+        "media": 94.5,
+        "desv": 3.319223008372644
+      }
+    },
+    "alerta": false,
+    "prev_hash": "195287a0e02d62a8e1153ecc5edf9bb632198178210878dad663f2bc15f593c6",
+    "hash": "d39c3789431693e67f31c7dc6cbb6f6ecb6cf3634f400c044f4bdc0c568c21a3"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:42.780436",
+    "datos": {
+      "frecuencia": {
+        "media": 123.46666666666667,
+        "desv": 38.11121052677403
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.63333333333333,
+          "diastolica": 88.53333333333333
+        },
+        "desv": {
+          "sistolica": 21.55103539129342,
+          "diastolica": 11.013262642059733
+        }
+      },
+      "oxigeno": {
+        "media": 94.63333333333334,
+        "desv": 3.21079357827607
+      }
+    },
+    "alerta": false,
+    "prev_hash": "d39c3789431693e67f31c7dc6cbb6f6ecb6cf3634f400c044f4bdc0c568c21a3",
+    "hash": "d654bd494a4ebb0c75ff68be4e794013035d1f6c6c8c34f068ed1af337e61049"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:43.780779",
+    "datos": {
+      "frecuencia": {
+        "media": 120.86666666666666,
+        "desv": 38.75273813092022
+      },
+      "presion": {
+        "media": {
+          "sistolica": 144.96666666666667,
+          "diastolica": 88.9
+        },
+        "desv": {
+          "sistolica": 21.04262231811873,
+          "diastolica": 11.108710468630553
+        }
+      },
+      "oxigeno": {
+        "media": 94.9,
+        "desv": 3.2307787040406772
+      }
+    },
+    "alerta": false,
+    "prev_hash": "d654bd494a4ebb0c75ff68be4e794013035d1f6c6c8c34f068ed1af337e61049",
+    "hash": "58e1beb11c3c0d5cbab728d3eeea903b891293b799c722e319c416159f503033"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:44.781115",
+    "datos": {
+      "frecuencia": {
+        "media": 120.43333333333334,
+        "desv": 38.31240308157474
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.0,
+          "diastolica": 88.56666666666666
+        },
+        "desv": {
+          "sistolica": 21.094205774130945,
+          "diastolica": 11.3462232310666
+        }
+      },
+      "oxigeno": {
+        "media": 94.9,
+        "desv": 3.2307787040406772
+      }
+    },
+    "alerta": false,
+    "prev_hash": "58e1beb11c3c0d5cbab728d3eeea903b891293b799c722e319c416159f503033",
+    "hash": "4098ad7c21cc3804f77f8f24726e31bd70a2796615630937167020d45238e54a"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:45.781458",
+    "datos": {
+      "frecuencia": {
+        "media": 120.26666666666667,
+        "desv": 38.40162831796673
+      },
+      "presion": {
+        "media": {
+          "sistolica": 147.16666666666666,
+          "diastolica": 88.73333333333333
+        },
+        "desv": {
+          "sistolica": 20.093030758386632,
+          "diastolica": 11.434772537681095
+        }
+      },
+      "oxigeno": {
+        "media": 94.63333333333334,
+        "desv": 3.21079357827607
+      }
+    },
+    "alerta": false,
+    "prev_hash": "4098ad7c21cc3804f77f8f24726e31bd70a2796615630937167020d45238e54a",
+    "hash": "d59d4468f46395c016d8dc724ac5da6c91781fd5a37f89a03bc74a15ad8b83f8"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:46.781813",
+    "datos": {
+      "frecuencia": {
+        "media": 121.8,
+        "desv": 39.819766361738594
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.03333333333333,
+          "diastolica": 88.9
+        },
+        "desv": {
+          "sistolica": 20.244170439452667,
+          "diastolica": 11.247528464143763
+        }
+      },
+      "oxigeno": {
+        "media": 94.53333333333333,
+        "desv": 3.115404809400663
+      }
+    },
+    "alerta": false,
+    "prev_hash": "d59d4468f46395c016d8dc724ac5da6c91781fd5a37f89a03bc74a15ad8b83f8",
+    "hash": "489bbc502ded4d5f36784910c77b4aece0dfb97a1448fa7f311b49033cc9cdb5"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:47.782142",
+    "datos": {
+      "frecuencia": {
+        "media": 124.03333333333333,
+        "desv": 38.61702620145262
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.63333333333333,
+          "diastolica": 88.76666666666667
+        },
+        "desv": {
+          "sistolica": 20.11087085227245,
+          "diastolica": 11.208627629345768
+        }
+      },
+      "oxigeno": {
+        "media": 94.66666666666667,
+        "desv": 3.2199093297721944
+      }
+    },
+    "alerta": false,
+    "prev_hash": "489bbc502ded4d5f36784910c77b4aece0dfb97a1448fa7f311b49033cc9cdb5",
+    "hash": "da63fb6422cc9027747838c6f2a2cc8872ff5fee9f24e39a2dc48da2a91369ed"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:48.782477",
+    "datos": {
+      "frecuencia": {
+        "media": 123.5,
+        "desv": 37.95073939582278
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.63333333333333,
+          "diastolica": 88.66666666666667
+        },
+        "desv": {
+          "sistolica": 19.27743603879637,
+          "diastolica": 11.284207253207171
+        }
+      },
+      "oxigeno": {
+        "media": 94.7,
+        "desv": 3.1856358646381677
+      }
+    },
+    "alerta": false,
+    "prev_hash": "da63fb6422cc9027747838c6f2a2cc8872ff5fee9f24e39a2dc48da2a91369ed",
+    "hash": "69a8601c5700afc870ed29b283aef9ed415ffbfc1b8122572347b02149452673"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:49.782818",
+    "datos": {
+      "frecuencia": {
+        "media": 123.9,
+        "desv": 37.61451480662659
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.9,
+          "diastolica": 88.3
+        },
+        "desv": {
+          "sistolica": 20.12435477654908,
+          "diastolica": 11.51655480092717
+        }
+      },
+      "oxigeno": {
+        "media": 94.73333333333333,
+        "desv": 3.2263284709246283
+      }
+    },
+    "alerta": false,
+    "prev_hash": "69a8601c5700afc870ed29b283aef9ed415ffbfc1b8122572347b02149452673",
+    "hash": "bdbd6ab9c95e5421e59838a673234346c444fd03b214018e276852f026eef57b"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:50.783267",
+    "datos": {
+      "frecuencia": {
+        "media": 123.4,
+        "desv": 37.21568078850264
+      },
+      "presion": {
+        "media": {
+          "sistolica": 149.0,
+          "diastolica": 88.73333333333333
+        },
+        "desv": {
+          "sistolica": 19.96721450709672,
+          "diastolica": 11.593497979570223
+        }
+      },
+      "oxigeno": {
+        "media": 94.76666666666667,
+        "desv": 3.191403683532431
+      }
+    },
+    "alerta": false,
+    "prev_hash": "bdbd6ab9c95e5421e59838a673234346c444fd03b214018e276852f026eef57b",
+    "hash": "161466a85377d2bd4479d5b86ed31b26d9311e8aad1b67e2df08d48d5d889748"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:51.783599",
+    "datos": {
+      "frecuencia": {
+        "media": 123.63333333333334,
+        "desv": 37.19610967174717
+      },
+      "presion": {
+        "media": {
+          "sistolica": 148.4,
+          "diastolica": 89.06666666666666
+        },
+        "desv": {
+          "sistolica": 19.261539308988887,
+          "diastolica": 11.386420627776038
+        }
+      },
+      "oxigeno": {
+        "media": 94.93333333333334,
+        "desv": 3.2263284709246283
+      }
+    },
+    "alerta": false,
+    "prev_hash": "161466a85377d2bd4479d5b86ed31b26d9311e8aad1b67e2df08d48d5d889748",
+    "hash": "2576aa5d55c3ba2a815ec9353768e61f57648448b865270232900c806eabc6a0"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:52.784040",
+    "datos": {
+      "frecuencia": {
+        "media": 125.9,
+        "desv": 36.058716484128475
+      },
+      "presion": {
+        "media": {
+          "sistolica": 148.83333333333334,
+          "diastolica": 89.66666666666667
+        },
+        "desv": {
+          "sistolica": 18.595667521622143,
+          "diastolica": 11.79518701766145
+        }
+      },
+      "oxigeno": {
+        "media": 94.96666666666667,
+        "desv": 3.2215153141868242
+      }
+    },
+    "alerta": false,
+    "prev_hash": "2576aa5d55c3ba2a815ec9353768e61f57648448b865270232900c806eabc6a0",
+    "hash": "73d9018bbcdb8141e06583c2337c96ae0032516f420de406ce2911ebcd97dc69"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:53.784371",
+    "datos": {
+      "frecuencia": {
+        "media": 124.33333333333333,
+        "desv": 35.26875469124568
+      },
+      "presion": {
+        "media": {
+          "sistolica": 149.0,
+          "diastolica": 88.73333333333333
+        },
+        "desv": {
+          "sistolica": 18.610341952425454,
+          "diastolica": 11.729518711157858
+        }
+      },
+      "oxigeno": {
+        "media": 95.23333333333333,
+        "desv": 3.125902168625258
+      }
+    },
+    "alerta": false,
+    "prev_hash": "73d9018bbcdb8141e06583c2337c96ae0032516f420de406ce2911ebcd97dc69",
+    "hash": "95c390d7820c98befd5b47aee354dc0c8372c70123c376854b49dce7c0553813"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:54.784706",
+    "datos": {
+      "frecuencia": {
+        "media": 123.83333333333333,
+        "desv": 35.33590860274586
+      },
+      "presion": {
+        "media": {
+          "sistolica": 149.3,
+          "diastolica": 88.76666666666667
+        },
+        "desv": {
+          "sistolica": 18.549374931377812,
+          "diastolica": 11.74934578760799
+        }
+      },
+      "oxigeno": {
+        "media": 95.33333333333333,
+        "desv": 3.0998702234607904
+      }
+    },
+    "alerta": false,
+    "prev_hash": "95c390d7820c98befd5b47aee354dc0c8372c70123c376854b49dce7c0553813",
+    "hash": "bc6c4f695253880f5a31cb6e0b88d6cde3568713977bc325c06f8da598a7c161"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:55.785070",
+    "datos": {
+      "frecuencia": {
+        "media": 124.26666666666667,
+        "desv": 35.3796486730703
+      },
+      "presion": {
+        "media": {
+          "sistolica": 148.3,
+          "diastolica": 88.6
+        },
+        "desv": {
+          "sistolica": 18.815162630909846,
+          "diastolica": 11.722657107293227
+        }
+      },
+      "oxigeno": {
+        "media": 95.13333333333334,
+        "desv": 3.245509718570156
+      }
+    },
+    "alerta": false,
+    "prev_hash": "bc6c4f695253880f5a31cb6e0b88d6cde3568713977bc325c06f8da598a7c161",
+    "hash": "494b32b468408efd10d11a55ec545836fc93afa02ff582568d4642e552628969"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:56.785407",
+    "datos": {
+      "frecuencia": {
+        "media": 124.9,
+        "desv": 35.09921897156393
+      },
+      "presion": {
+        "media": {
+          "sistolica": 149.13333333333333,
+          "diastolica": 89.63333333333334
+        },
+        "desv": {
+          "sistolica": 19.213381352289495,
+          "diastolica": 11.757560541415785
+        }
+      },
+      "oxigeno": {
+        "media": 95.36666666666666,
+        "desv": 3.189241973857752
+      }
+    },
+    "alerta": false,
+    "prev_hash": "494b32b468408efd10d11a55ec545836fc93afa02ff582568d4642e552628969",
+    "hash": "72abb02963e3cf9eb5ceff91de11ea6b878f000009ba1115fea6e354f67d7f08"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:57.785772",
+    "datos": {
+      "frecuencia": {
+        "media": 121.56666666666666,
+        "desv": 35.22017773294493
+      },
+      "presion": {
+        "media": {
+          "sistolica": 149.36666666666667,
+          "diastolica": 89.4
+        },
+        "desv": {
+          "sistolica": 18.925413188826713,
+          "diastolica": 11.57166575199362
+        }
+      },
+      "oxigeno": {
+        "media": 95.16666666666667,
+        "desv": 3.1413080224572094
+      }
+    },
+    "alerta": false,
+    "prev_hash": "72abb02963e3cf9eb5ceff91de11ea6b878f000009ba1115fea6e354f67d7f08",
+    "hash": "922dc264e337e77b6c5884e92a3a608cededa3a28ff90183463f5d9beb972f60"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:58.786241",
+    "datos": {
+      "frecuencia": {
+        "media": 121.26666666666667,
+        "desv": 34.758212458832425
+      },
+      "presion": {
+        "media": {
+          "sistolica": 148.4,
+          "diastolica": 90.0
+        },
+        "desv": {
+          "sistolica": 18.410267000629915,
+          "diastolica": 11.151001192099608
+        }
+      },
+      "oxigeno": {
+        "media": 95.16666666666667,
+        "desv": 3.1413080224572094
+      }
+    },
+    "alerta": false,
+    "prev_hash": "922dc264e337e77b6c5884e92a3a608cededa3a28ff90183463f5d9beb972f60",
+    "hash": "a07a1dc8ed1dd8960a827a3bf2c3eb4cc1224b4b66b9f9c104db8716b2938ad5"
+  },
+  {
+    "timestamp": "2025-08-03T21:19:59.786572",
+    "datos": {
+      "frecuencia": {
+        "media": 120.93333333333334,
+        "desv": 34.62003937659201
+      },
+      "presion": {
+        "media": {
+          "sistolica": 147.86666666666667,
+          "diastolica": 90.93333333333334
+        },
+        "desv": {
+          "sistolica": 19.292187686914268,
+          "diastolica": 11.282984850049068
+        }
+      },
+      "oxigeno": {
+        "media": 95.2,
+        "desv": 3.1006117305216203
+      }
+    },
+    "alerta": false,
+    "prev_hash": "a07a1dc8ed1dd8960a827a3bf2c3eb4cc1224b4b66b9f9c104db8716b2938ad5",
+    "hash": "cae386645679149c5a481f33abd63d79ad5b8cd60f30c11272922e449939d440"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:00.786939",
+    "datos": {
+      "frecuencia": {
+        "media": 119.8,
+        "desv": 34.258047129155635
+      },
+      "presion": {
+        "media": {
+          "sistolica": 147.5,
+          "diastolica": 90.03333333333333
+        },
+        "desv": {
+          "sistolica": 19.29579193002704,
+          "diastolica": 11.03125132281585
+        }
+      },
+      "oxigeno": {
+        "media": 95.16666666666667,
+        "desv": 3.0859339762456237
+      }
+    },
+    "alerta": false,
+    "prev_hash": "cae386645679149c5a481f33abd63d79ad5b8cd60f30c11272922e449939d440",
+    "hash": "833e53d8bc11fc9db76a958de3429bcf202d477829a46ca2400814bdc533a407"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:01.787271",
+    "datos": {
+      "frecuencia": {
+        "media": 121.66666666666667,
+        "desv": 33.01027356626328
+      },
+      "presion": {
+        "media": {
+          "sistolica": 147.5,
+          "diastolica": 89.93333333333334
+        },
+        "desv": {
+          "sistolica": 19.29579193002704,
+          "diastolica": 10.932183847619877
+        }
+      },
+      "oxigeno": {
+        "media": 95.3,
+        "desv": 3.2072117012370303
+      }
+    },
+    "alerta": false,
+    "prev_hash": "833e53d8bc11fc9db76a958de3429bcf202d477829a46ca2400814bdc533a407",
+    "hash": "6aac8a317dd000899da70b88a9df46b3bc3efe99662041c593361e132c9adaea"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:02.787609",
+    "datos": {
+      "frecuencia": {
+        "media": 123.4,
+        "desv": 33.143990977717735
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.33333333333334,
+          "diastolica": 89.9
+        },
+        "desv": {
+          "sistolica": 20.177374377792795,
+          "diastolica": 10.993258122046031
+        }
+      },
+      "oxigeno": {
+        "media": 95.23333333333333,
+        "desv": 3.125902168625258
+      }
+    },
+    "alerta": false,
+    "prev_hash": "6aac8a317dd000899da70b88a9df46b3bc3efe99662041c593361e132c9adaea",
+    "hash": "d8d2d3c0201d633f0d620ed7b9a7dd022f92403f365e11d8cddd2fae9dc105fa"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:03.787978",
+    "datos": {
+      "frecuencia": {
+        "media": 123.33333333333333,
+        "desv": 33.046814582089276
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.66666666666666,
+          "diastolica": 89.86666666666666
+        },
+        "desv": {
+          "sistolica": 19.902059039782504,
+          "diastolica": 10.969340763309763
+        }
+      },
+      "oxigeno": {
+        "media": 95.06666666666666,
+        "desv": 3.1065374152975656
+      }
+    },
+    "alerta": false,
+    "prev_hash": "d8d2d3c0201d633f0d620ed7b9a7dd022f92403f365e11d8cddd2fae9dc105fa",
+    "hash": "2e17b8280426b24cbb015a2b5146122be9268a8b0123e440d1cf5b382606e0e8"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:04.788315",
+    "datos": {
+      "frecuencia": {
+        "media": 123.43333333333334,
+        "desv": 33.13783475053889
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.66666666666666,
+          "diastolica": 90.36666666666666
+        },
+        "desv": {
+          "sistolica": 19.902059039782504,
+          "diastolica": 11.034376795468235
+        }
+      },
+      "oxigeno": {
+        "media": 95.0,
+        "desv": 3.1513543886333415
+      }
+    },
+    "alerta": false,
+    "prev_hash": "2e17b8280426b24cbb015a2b5146122be9268a8b0123e440d1cf5b382606e0e8",
+    "hash": "e29c19b4b67415b9443ebb6acfde57676a07c64e8b9011705add7610070f5439"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:05.788651",
+    "datos": {
+      "frecuencia": {
+        "media": 126.16666666666667,
+        "desv": 32.898048714101606
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.6,
+          "diastolica": 90.36666666666666
+        },
+        "desv": {
+          "sistolica": 19.354407855790264,
+          "diastolica": 11.034376795468235
+        }
+      },
+      "oxigeno": {
+        "media": 94.9,
+        "desv": 3.1985988311694578
+      }
+    },
+    "alerta": false,
+    "prev_hash": "e29c19b4b67415b9443ebb6acfde57676a07c64e8b9011705add7610070f5439",
+    "hash": "ecdf90041d540e56bcbb6433a9e73553c12224bd12c8cfbc2276d909934a1498"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:06.789027",
+    "datos": {
+      "frecuencia": {
+        "media": 128.4,
+        "desv": 33.05335289998633
+      },
+      "presion": {
+        "media": {
+          "sistolica": 146.43333333333334,
+          "diastolica": 91.6
+        },
+        "desv": {
+          "sistolica": 19.13956604799981,
+          "diastolica": 10.978348597627718
+        }
+      },
+      "oxigeno": {
+        "media": 94.9,
+        "desv": 3.1985988311694578
+      }
+    },
+    "alerta": false,
+    "prev_hash": "ecdf90041d540e56bcbb6433a9e73553c12224bd12c8cfbc2276d909934a1498",
+    "hash": "6fedefff131cf70aeed93ca39b28c6cc766f06875b57003d8d02039eb7b2c164"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:07.789337",
+    "datos": {
+      "frecuencia": {
+        "media": 128.43333333333334,
+        "desv": 33.082637735528735
+      },
+      "presion": {
+        "media": {
+          "sistolica": 147.23333333333332,
+          "diastolica": 91.26666666666667
+        },
+        "desv": {
+          "sistolica": 18.841779206809555,
+          "diastolica": 10.802085792626551
+        }
+      },
+      "oxigeno": {
+        "media": 94.7,
+        "desv": 3.120013262571281
+      }
+    },
+    "alerta": false,
+    "prev_hash": "6fedefff131cf70aeed93ca39b28c6cc766f06875b57003d8d02039eb7b2c164",
+    "hash": "752e57602d3540ed67866e31391765a37839cd6d990594caddfe374ded27a78d"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:08.789682",
+    "datos": {
+      "frecuencia": {
+        "media": 130.56666666666666,
+        "desv": 31.824609143341206
+      },
+      "presion": {
+        "media": {
+          "sistolica": 147.66666666666666,
+          "diastolica": 92.06666666666666
+        },
+        "desv": {
+          "sistolica": 19.055876699370437,
+          "diastolica": 11.05451486274159
+        }
+      },
+      "oxigeno": {
+        "media": 94.73333333333333,
+        "desv": 3.1176177170854444
+      }
+    },
+    "alerta": false,
+    "prev_hash": "752e57602d3540ed67866e31391765a37839cd6d990594caddfe374ded27a78d",
+    "hash": "613a7721d7bc87c0b8f888a197633ee1246938f8ac6358abb29be4d40567290c"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:09.790054",
+    "datos": {
+      "frecuencia": {
+        "media": 129.86666666666667,
+        "desv": 31.220830063998257
+      },
+      "presion": {
+        "media": {
+          "sistolica": 145.76666666666668,
+          "diastolica": 91.23333333333333
+        },
+        "desv": {
+          "sistolica": 19.180959188797072,
+          "diastolica": 11.220926673064879
+        }
+      },
+      "oxigeno": {
+        "media": 94.9,
+        "desv": 2.9867523591975975
+      }
+    },
+    "alerta": false,
+    "prev_hash": "613a7721d7bc87c0b8f888a197633ee1246938f8ac6358abb29be4d40567290c",
+    "hash": "09601059d1a6cdadaa33d4d4c6ba15a0e6b748a0a8b651dfeffaf75f482b0d02"
+  },
+  {
+    "timestamp": "2025-08-03T21:20:10.790389",
+    "datos": {
+      "frecuencia": {
+        "media": 132.66666666666666,
+        "desv": 31.196079918779066
+      },
+      "presion": {
+        "media": {
+          "sistolica": 144.9,
+          "diastolica": 91.23333333333333
+        },
+        "desv": {
+          "sistolica": 18.771493427994518,
+          "diastolica": 11.220926673064879
+        }
+      },
+      "oxigeno": {
+        "media": 94.93333333333334,
+        "desv": 2.9934795038934014
+      }
+    },
+    "alerta": false,
+    "prev_hash": "09601059d1a6cdadaa33d4d4c6ba15a0e6b748a0a8b651dfeffaf75f482b0d02",
+    "hash": "cd9afa536634aad390eebd3d8c6c84c2e11686c7d030dff35d66c9aa828771d1"
+  }
+]
