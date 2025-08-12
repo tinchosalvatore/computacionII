@@ -9,7 +9,6 @@ import hashlib
 
 
 # <------------- Funcion del Proceso Principal ----------------->
-
 def generador_principal(freq_generador, presion_generador, oxigeno_generador):
     print("Proceso Principal generando los datos...")
     print("Tomara aproximadamente 1 minuto")
