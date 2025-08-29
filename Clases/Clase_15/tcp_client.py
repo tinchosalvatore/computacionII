@@ -15,9 +15,9 @@ def send_lines(sock, lines):
         sock.sendall(line.encode("utf-8"))   # Enviamos la linea
 
 
-# Función para recibir datos a través de un socket hasta que el servidor cierre la conexión
+# Vamos recibiendo los datos de a poco y agregandolos al chunk
 def recv_until_closed(sock):
-    # chunks son bloques de datos qeu se reciben atraves del socket
+    # chunks son bloques de datos qeu se reciben a traves del socket
     chunks = []
     while True:
         # Recibimos datos de a 1024 bytes
@@ -31,9 +31,9 @@ def recv_until_closed(sock):
     return b"".join(chunks)
 
 def main():
-    HOST, PORT = "127.0.0.1", 9002    # Direccion y puerto del servidor
+    HOST, PORT = "127.0.0.1", 9002    # local host
     
-    # Creamos un socket TCP con contexto (osea el with)
+    #  Socket IPv4, TCP manejador de contexto (osea el with)
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))  # Conectamos al servidor
         
@@ -41,7 +41,7 @@ def main():
         
         s.shutdown(socket.SHUT_WR)      # Cerramos la conexion de escritura
         
-        data = recv_until_closed(s)    # Recibimos los datos del servidor
+        data = recv_until_closed(s)    # Recibimos los datos del servidor hasta que cierre su conexion
         
         print(data.decode("utf-8", errors="replace"))   # Imprimimos los datos recibidos traducidos
 
