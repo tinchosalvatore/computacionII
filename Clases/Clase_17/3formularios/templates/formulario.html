@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario</title>
+</head>
+<body>
+
+    <!-- Usamos todos los tipos de input que pide el enunciado -->
+
+    <h1>Formulario de Registro</h1>
+    <form method="POST" action="/submit">    <!-- La accion submit es la que llama el metodo do_POST -->
+        <label>Nombre: <input type="text" name="nombre"></label><br><br>
+        <label>Email: <input type="email" name="email"></label><br><br>
+        <label>País:
+            <select name="pais">
+                <option value="Argentina">Argentina</option>
+                <option value="Chile">Chile</option>
+                <option value="Uruguay">Uruguay</option>
+            </select>
+        </label><br><br>
+        <label>
+            <input type="checkbox" name="suscripcion" value="si">
+            Deseo recibir novedades
+        </label><br><br>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
