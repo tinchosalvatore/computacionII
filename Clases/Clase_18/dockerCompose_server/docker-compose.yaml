@@ -1,0 +1,30 @@
+services:
+  server:
+    build: ./server
+    container_name: server-now
+    ports:
+      - "9999:9999/udp"    # Usamos este puerto para poder usar nc desde fuera del contenedor
+    
+    networks:
+      - app_net    # Servidor y Cliente estan en la misma red
+
+    volumes:  # permite que los cambios en el servidor se vean reflejados sin necesidad de reconstruir la imagen
+      - ./server:/app   # Mapea la carpeta local al servidor, 
+
+
+  client:
+    build: ./client
+    container_name: client-container
+    depends_on:
+      - server
+    
+    networks:
+      - app_net   # Servidor y Cliente estan en la misma red
+
+    volumes:  # para no reconstruir la imagen en caso de cambios
+      - ./client:/app
+
+
+networks:
+  app_net:
+    driver: bridge

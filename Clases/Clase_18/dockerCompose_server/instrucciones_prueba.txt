@@ -1,0 +1,25 @@
+Esto es lo que hay que hacer para ejecutar el servidor y el cliente
+
+1. Estar en la carpeta donde esta el docker-compose.yaml y creamos la Imagen del servidor y del cliente 
+
+- sudo docker compose build
+
+2. Levantamos los contenedores
+
+- sudo docker compose up -d
+
+El -d significa detatched y hace que se ejecute en segundo plano
+
+3. Ejecutar el clietne
+
+- sudo docker compose run --rm client python client.py     
+
+Esto va a crear un contenedor temporal que ejecuta el script de cliente y despues lo elimina
+
+El output del cliente.pt deberia ser algo como -->    Received from server: Current time: 2025-09-23 11:15:42
+
+4. Por ultimo probar el cliente desde el HOST con netcat
+
+- echo "TIME" | nc -u 127.0.0.1 9999
+
+Deberia recibir un msj similar al de la salida de cliente.py
