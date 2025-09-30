@@ -20,6 +20,23 @@ El output del cliente.pt deberia ser algo como -->    Received from server: Curr
 
 4. Por ultimo probar el cliente desde el HOST con netcat
 
-- echo "TIME" | nc -u 127.0.0.1 9999
+- nc -u 127.0.0.1 9999
+
+Ahi mandar como argumento "time" o "TIME"
 
 Deberia recibir un msj similar al de la salida de cliente.py
+
+
+5. Limpiar todo despues de ejecutar
+
+sudo docker compose down --volumes
+
+sudo docker compose rm -s -f
+
+sudo docker network prune -f
+
+sudo docker volume prune -f
+
+sudo docker ps -a
+sudo docker network ls
+sudo docker volume ls
