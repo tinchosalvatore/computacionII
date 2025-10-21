@@ -1,0 +1,5 @@
+# Imports de la Clase 21
+aiohttp
+aiofiles
+motor
+asyncpg
