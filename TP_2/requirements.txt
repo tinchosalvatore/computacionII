@@ -1,7 +1,0 @@
-aiohttp
-beautifulsoup4
-lxml
-Pillow
-playwright
-requests
-aiofiles
