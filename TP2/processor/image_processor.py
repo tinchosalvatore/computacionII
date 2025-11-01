@@ -1,20 +1,33 @@
 import base64
 import io
 import requests
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
 def get_image_urls(url: str) -> list:
     """
     Obtiene las URLs de las imágenes de una página.
+    
+    Args:
+        url: La URL de la página.
+        
+    Returns:
+        Lista de URLs de imágenes encontradas.
     """
     try:
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         soup = BeautifulSoup(response.content, 'html.parser')
         
-        img_urls = [urljoin(url, img['src']) for img in soup.find_all('img') if img.get('src')]
+        img_urls = []
+        for img in soup.find_all('img'):
+            src = img.get('src')
+            if src:
+                # Ignorar imágenes data: que son muy comunes
+                if not src.startswith('data:'):
+                    img_urls.append(urljoin(url, src))
+        
         return img_urls
     except requests.RequestException as e:
         print(f"[ImageProcessor] Could not fetch image URLs from {url}: {e}")
@@ -32,6 +45,7 @@ def process(url: str) -> list:
     """
     image_urls = get_image_urls(url)
     if not image_urls:
+        print(f"[ImageProcessor] No se encontraron imágenes en {url}")
         return []
 
     images_data = []
@@ -54,8 +68,12 @@ def process(url: str) -> list:
                     })
         except (requests.RequestException, IOError, UnidentifiedImageError) as e:
             # Ignoramos imágenes que no se pueden descargar o procesar.
-            # print(f"Skipping image {img_url}: {e}")
+            # print(f"[ImageProcessor] Skipping image {img_url}: {e}")
             continue
+
+    if not images_data:
+        print(f"[ImageProcessor] No se encontraron imágenes válidas (>100x100) en {url}")
+        return []
 
     # Ordenamos las imágenes por área (de mayor a menor) y tomamos las 3 principales.
     images_data.sort(key=lambda x: x['area'], reverse=True)
@@ -75,10 +93,8 @@ def process(url: str) -> list:
                 base64_thumb = base64.b64encode(thumb_bytes).decode('utf-8')
                 thumbnails_base64.append(base64_thumb)
         except (IOError, UnidentifiedImageError) as e:
-            print(f"Could not create thumbnail: {e}")
+            print(f"[ImageProcessor] Could not create thumbnail: {e}")
             continue
-            
+    
+    print(f"[ImageProcessor] Generados {len(thumbnails_base64)} thumbnails para {url}")
     return thumbnails_base64
-
-# Importamos UnidentifiedImageError para compatibilidad con Pillow >= 9.0
-from PIL import UnidentifiedImageError

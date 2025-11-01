@@ -1,7 +1,7 @@
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.common.exceptions import WebDriverException
+from selenium.common.exceptions import WebDriverException, TimeoutException
 
 def analyze(url: str) -> dict:
     """
@@ -22,11 +22,13 @@ def analyze(url: str) -> dict:
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-extensions")
 
     driver = None
     try:
         driver = webdriver.Chrome(options=chrome_options)
-        driver.set_page_load_timeout(30) # Timeout de 30 segundos para la carga
+        driver.set_page_load_timeout(30)  # Timeout de 30 segundos (requisito del enunciado)
 
         print(f"[Performance] Navegando a {url} para análisis de rendimiento...")
         driver.get(url)
@@ -38,23 +40,22 @@ def analyze(url: str) -> dict:
         load_time_ms = 0
         if navigation_timing:
             # loadEventEnd - navigationStart da el tiempo total de carga de la página
-            load_time_ms = navigation_timing['loadEventEnd'] - navigation_timing['navigationStart']
-            if load_time_ms < 0: # Puede ser negativo si los eventos no se disparan en orden esperado
+            load_time_ms = navigation_timing.get('loadEventEnd', 0) - navigation_timing.get('navigationStart', 0)
+            if load_time_ms < 0:  # Puede ser negativo si los eventos no se disparan en orden esperado
                 load_time_ms = 0
 
         # Usamos Resource Timing API para el número de requests y tamaño total
         resource_entries = driver.execute_script("return window.performance.getEntriesByType('resource')")
         
-        num_requests = len(resource_entries) + 1 # +1 para la solicitud del documento principal
+        num_requests = len(resource_entries) + 1  # +1 para la solicitud del documento principal
         total_size_bytes = 0
+        
         for entry in resource_entries:
             # transferSize incluye el tamaño de la cabecera y el cuerpo, si está disponible
-            # decodedBodySize es el tamaño del cuerpo después de la decodificación de contenido
             if 'transferSize' in entry and entry['transferSize'] > 0:
                 total_size_bytes += entry['transferSize']
             elif 'decodedBodySize' in entry and entry['decodedBodySize'] > 0:
                 total_size_bytes += entry['decodedBodySize']
-            # Si no hay información de tamaño, podríamos estimar o ignorar
 
         total_size_kb = total_size_bytes / 1024
 
@@ -65,6 +66,9 @@ def analyze(url: str) -> dict:
             "num_requests": num_requests
         }
 
+    except TimeoutException as e:
+        print(f"[ERROR][Performance] Timeout al cargar {url}: {e}")
+        raise WebDriverException(f"Timeout al cargar la página: {e}")
     except WebDriverException as e:
         print(f"[ERROR][Performance] Ocurrió un error con Selenium para la URL {url}: {e}")
         raise
