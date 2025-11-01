@@ -1,11 +1,10 @@
-# server_processing.py
 import socketserver
-import json
 import argparse
 import os
 from concurrent.futures import ProcessPoolExecutor
 from processor import screenshot, performance, image_processor
 from common.protocol import receive_data, send_data
+from common.serialization import serialize_data, deserialize_data
 import base64
 
 # Esta función será ejecutada en un proceso separado por el ProcessPoolExecutor
@@ -52,7 +51,7 @@ class TCPHandler(socketserver.BaseRequestHandler):
             return
 
         try:
-            task = json.loads(data.decode('utf-8'))
+            task = deserialize_data(data)
             url = task.get("url")
             if not url:
                 raise ValueError("Task dictionary must contain a 'url' key")
@@ -63,17 +62,17 @@ class TCPHandler(socketserver.BaseRequestHandler):
             future = PROCESS_POOL.submit(processing_task, url)
             result = future.result()
 
-            send_data(self.request, json.dumps(result).encode('utf-8'))
+            send_data(self.request, serialize_data(result))
             print(f"Result for {url} sent back to Server A.")
 
-        except (json.JSONDecodeError, ValueError) as e:
+        except (ValueError) as e:
             print(f"Invalid request received: {e}")
             error_response = {"error": f"Invalid request: {e}", "status": "failed"}
-            send_data(self.request, json.dumps(error_response).encode('utf-8'))
+            send_data(self.request, serialize_data(error_response))
         except Exception as e:
             print(f"An unexpected error occurred in the handler: {e}")
             error_response = {"error": f"Unexpected server error: {e}", "status": "failed"}
-            send_data(self.request, json.dumps(error_response).encode('utf-8'))
+            send_data(self.request, serialize_data(error_response))
 
 def main():
     global PROCESS_POOL

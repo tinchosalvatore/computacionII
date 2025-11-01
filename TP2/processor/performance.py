@@ -1,61 +1,76 @@
-from playwright.sync_api import sync_playwright, Error
-import json
 import os
-import tempfile
-import uuid
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import WebDriverException
 
-def analyze_performance(url: str) -> dict:
+def analyze(url: str) -> dict:
     """
-    Analiza el rendimiento de carga de una URL usando la grabación de archivos HAR de Playwright.
-    """
-    # Creamos una ruta de archivo temporal única para guardar los datos HAR.
-    har_path = os.path.join(tempfile.gettempdir(), f"perf_{uuid.uuid4()}.har")
+    Analiza el rendimiento de carga de una URL usando Selenium.
+    Calcula el tiempo de carga, el número de solicitudes y el tamaño total de los recursos.
 
+    Args:
+        url: La URL de la página a analizar.
+
+    Returns:
+        Un diccionario con las métricas de rendimiento.
+    
+    Raises:
+        WebDriverException: Si ocurre un problema con el driver de Selenium.
+    """
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--window-size=1920,1080")
+
+    driver = None
     try:
-        with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
-            # Creamos un nuevo "contexto" de navegador con la grabación HAR habilitada.
-            context = browser.new_context(record_har_path=har_path)
-            page = context.new_page()
+        driver = webdriver.Chrome(options=chrome_options)
+        driver.set_page_load_timeout(30) # Timeout de 30 segundos para la carga
 
-            page.goto(url, wait_until='load', timeout=30000)
-            
-            # Es crucial cerrar el contexto para que Playwright escriba el archivo HAR en disco.
-            context.close()
-            browser.close()
+        print(f"[Performance] Navegando a {url} para análisis de rendimiento...")
+        driver.get(url)
 
-        # Una vez cerrado el contexto, leemos y procesamos el archivo HAR.
-        with open(har_path, 'r', encoding='utf-8') as f:
-            har_data = json.load(f)
+        # --- Obtener métricas de rendimiento --- 
+        # Usamos Navigation Timing API
+        navigation_timing = driver.execute_script("return window.performance.timing")
+        
+        load_time_ms = 0
+        if navigation_timing:
+            # loadEventEnd - navigationStart da el tiempo total de carga de la página
+            load_time_ms = navigation_timing['loadEventEnd'] - navigation_timing['navigationStart']
+            if load_time_ms < 0: # Puede ser negativo si los eventos no se disparan en orden esperado
+                load_time_ms = 0
 
-        # Extraemos las métricas del log del archivo HAR.
-        entries = har_data['log']['entries']
-        num_requests = len(entries)
-        # `bodySize` es el tamaño del cuerpo de la respuesta en bytes. -1 si no aplica.
-        total_size_bytes = sum(entry['response']['bodySize'] for entry in entries if entry['response']['bodySize'] > -1)
+        # Usamos Resource Timing API para el número de requests y tamaño total
+        resource_entries = driver.execute_script("return window.performance.getEntriesByType('resource')")
+        
+        num_requests = len(resource_entries) + 1 # +1 para la solicitud del documento principal
+        total_size_bytes = 0
+        for entry in resource_entries:
+            # transferSize incluye el tamaño de la cabecera y el cuerpo, si está disponible
+            # decodedBodySize es el tamaño del cuerpo después de la decodificación de contenido
+            if 'transferSize' in entry and entry['transferSize'] > 0:
+                total_size_bytes += entry['transferSize']
+            elif 'decodedBodySize' in entry and entry['decodedBodySize'] > 0:
+                total_size_bytes += entry['decodedBodySize']
+            # Si no hay información de tamaño, podríamos estimar o ignorar
+
         total_size_kb = total_size_bytes / 1024
 
-        # El tiempo de carga se obtiene de los timings de la página en el HAR.
-        page_timings = har_data['log']['pages'][0]['pageTimings']
-        # `onLoad` es el tiempo en ms hasta que se dispara el evento `load` de la página.
-        load_time_ms = page_timings.get('onLoad', 0)
-
+        print(f"[Performance] Análisis para {url} completado.")
         return {
-            "status": "success",
-            "performance": {
-                "load_time_ms": round(load_time_ms),
-                "num_requests": num_requests,
-                "total_size_kb": round(total_size_kb, 2)
-            }
+            "load_time_ms": round(load_time_ms),
+            "total_size_kb": round(total_size_kb, 2),
+            "num_requests": num_requests
         }
 
-    except Error as e:
-        print(f"[ERROR Performance] No se pudo analizar {url}: {e}")
-        return {"status": "error", "reason": f"Error de Playwright: {e}"}
+    except WebDriverException as e:
+        print(f"[ERROR][Performance] Ocurrió un error con Selenium para la URL {url}: {e}")
+        raise
     except Exception as e:
-        print(f"[ERROR Performance] Error inesperado para {url}: {e}")
-        return {"status": "error", "reason": f"Error inesperado: {e}"}
+        print(f"[ERROR][Performance] Error inesperado para {url}: {e}")
+        raise
     finally:
-        # Nos aseguramos de limpiar el archivo temporal HAR sin importar lo que pase.
-        if os.path.exists(har_path):
-            os.remove(har_path)
+        if driver:
+            driver.quit()

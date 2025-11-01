@@ -1,26 +1,26 @@
-
 import asyncio
 from aiohttp import web
 import aiohttp
 import argparse
-import json
 import datetime
-from bs4 import BeautifulSoup
-from urllib.parse import urljoin
 
-# Explicación: Esta función es un cliente TCP asíncrono. Se encarga de
+# Modulos del proyecto
+from scraper import async_http, html_parser, metadata_extractor
+from common.serialization import serialize_data, deserialize_data
+
+# Esta función es un cliente TCP asíncrono. Se encarga de
 # comunicarse con el Servidor B (el de procesamiento).
 async def send_task_to_processor(host, port, task):
     """
     Se conecta al servidor de procesamiento, envía una tarea y devuelve el resultado.
     """
     try:
-        # Explicación: `asyncio.open_connection` establece una conexión de forma no bloqueante.
+        # `asyncio.open_connection` establece una conexión de forma no bloqueante.
         # El `await` pausa la ejecución de esta función hasta que la conexión se establece.
         reader, writer = await asyncio.open_connection(host, port)
 
         # Prepara el mensaje usando el mismo protocolo que el Servidor B espera.
-        message = json.dumps(task).encode('utf-8')
+        message = serialize_data(task)
         message_len = len(message).to_bytes(4, 'big')
 
         # Envía los datos.
@@ -32,7 +32,7 @@ async def send_task_to_processor(host, port, task):
         response_len_raw = await reader.readexactly(4)
         response_len = int.from_bytes(response_len_raw, 'big')
         response_data = await reader.readexactly(response_len)
-        result = json.loads(response_data.decode('utf-8'))
+        result = deserialize_data(response_data)
         
         print(f"[Cliente TCP] Resultado recibido: {result}")
 
@@ -46,68 +46,30 @@ async def send_task_to_processor(host, port, task):
         print(f"[ERROR] No se pudo conectar o comunicar con el servidor de procesamiento: {e}")
         return {"status": "error", "reason": str(e)}
 
-# Explicación: Esta nueva función contiene la lógica de scraping real.
-# Es asíncrona porque realiza una petición HTTP de red.
-async def scrape_url_data(url):
+
+async def scrape_url_data(url: str) -> dict:
     """
-    Realiza el scraping de una URL para extraer título, links, metas, etc.
+    Orquesta el proceso de scraping de una URL.
     """
-    # Explicación: aiohttp.ClientSession() es la forma recomendada de realizar
-    # peticiones. Usar `async with` asegura que la sesión se cierre correctamente.
-    async with aiohttp.ClientSession() as session:
-        try:
-            # Realizamos la petición GET de forma asíncrona con un timeout de 30s.
-            async with session.get(url, timeout=30) as response:
-                response.raise_for_status() # Lanza un error si el status es 4xx o 5xx
+    try:
+        # 1. Obtener el HTML de forma asíncrona
+        html = await async_http.fetch_html(url)
 
-                # Verificamos que el contenido sea HTML antes de intentar parsearlo.
-                if 'text/html' not in response.content_type:
-                    reason = f"Content-Type no soportado: {response.content_type}"
-                    print(f"[ERROR] {reason} para la URL {url}")
-                    return {"status": "error", "reason": reason}
+        # 2. Parsear el HTML para extraer datos básicos y el objeto soup
+        parsed_data = html_parser.parse_html_data(html, url)
+        soup = parsed_data.pop('soup')  # Extraemos soup para el siguiente paso
 
-                html = await response.text()
-        except Exception as e:
-            print(f"[ERROR] No se pudo obtener el contenido de {url}: {e}")
-            # Devolvemos un diccionario con un estado de error claro.
-            return {"status": "error", "reason": f"No se pudo acceder a la URL: {e}"}
+        # 3. Extraer metadatos usando el objeto soup
+        metadata = metadata_extractor.extract_metadata(soup, url)
 
-    # Usamos BeautifulSoup para parsear el HTML. 'lxml' es un parser rápido.
-    soup = BeautifulSoup(html, 'lxml')
+        # 4. Consolidar todos los datos extraídos
+        return {**parsed_data, **metadata}
 
-    # --- Extracción de datos ---
-    title = soup.title.string.strip() if soup.title else "Sin título"
+    except (aiohttp.ClientError, ValueError) as e:
+        print(f"[ERROR] Fallo en el scraping de {url}: {e}")
+        return {"status": "error", "reason": str(e)}
 
-    # Extraemos todos los links, los convertimos a absolutos y eliminamos duplicados.
-    links = sorted(list(set(
-        urljoin(url, a['href']) for a in soup.find_all('a', href=True)
-    )))
 
-    # Extraemos meta tags relevantes (name y property) que tengan contenido.
-    meta_tags = {
-        meta.get('name', meta.get('property', 'unknown')): meta.get('content', '')
-        for meta in soup.find_all('meta')
-        if meta.get('content') and (meta.get('name') in ['description', 'keywords'] or meta.get('property', '').startswith('og:'))
-    }
-
-    images_count = len(soup.find_all('img'))
-
-    # Contamos las etiquetas de encabezado de H1 a H6.
-    structure = {f'h{i}': len(soup.find_all(f'h{i}')) for i in range(1, 7)}
-
-    # Extraemos las URLs de todas las imágenes para análisis posterior.
-    image_urls = sorted(list(set(
-        urljoin(url, img['src']) for img in soup.find_all('img', src=True)
-    )))
-
-    return {
-        "title": title,
-        "links": links,
-        "meta_tags": meta_tags,
-        "images_count": images_count,
-        "structure": structure,
-        "image_urls": image_urls
-    }
 
 # Explicación: El manejador ahora llama a la función de scraping real.
 async def scrape_handler(request):

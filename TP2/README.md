@@ -26,9 +26,9 @@ Ambos servidores se comunican a través de sockets TCP. El Servidor A actúa com
 - **`multiprocessing`**: Permite la ejecución de tareas en paralelo en el Servidor B, evitando que las operaciones CPU-bound bloqueen el sistema.
 - **`socketserver`**: Proporciona la estructura para el servidor TCP del Servidor B.
 - **`BeautifulSoup4`**: Librería principal para el parseo de HTML y la extracción de datos en el Servidor A.
-- **`Playwright`**: Herramienta de automatización de navegadores utilizada en el Servidor B para:
+- **`Selenium`**: Herramienta de automatización de navegadores utilizada en el Servidor B para:
     - Tomar capturas de pantalla de las páginas web.
-    - Realizar análisis de rendimiento mediante la grabación de archivos HAR.
+    - Realizar análisis de rendimiento de carga.
 - **`Pillow`**: Librería para el procesamiento de imágenes, utilizada para crear los thumbnails en el Servidor B.
 - **`requests`**: Utilizado en el `client.py` para realizar peticiones HTTP de prueba al sistema.
 
@@ -53,11 +53,11 @@ Sigue estos pasos para configurar el entorno de desarrollo.
     pip install -r requirements.txt
     ```
 
-4.  **Instalar los navegadores para Playwright:**
-    Este comando descarga las versiones de los navegadores que Playwright necesita para operar.
-    ```bash
-    playwright install
-    ```
+
+
+## Antes de Ejecutar
+
+Asegúrate de haber activado tu entorno virtual (`venv`) y de haber instalado todas las dependencias del proyecto (`pip install -r requirements.txt`).
 
 ## Ejecución
 
@@ -66,15 +66,13 @@ El sistema requiere que ambos servidores se ejecuten de forma simultánea en ter
 ### 1. Iniciar Servidor de Procesamiento (Servidor B)
 En una primera terminal, ejecuta:
 ```bash
-# Ejemplo: Escuchar en localhost, puerto 9000, con 4 procesos
-python3 server_processing.py -i 127.0.0.1 -p 9000 -n 4
+python3 server_processing.py -i 0.0.0.0 -p 9000 -n 4
 ```
 
 ### 2. Iniciar Servidor de Scraping (Servidor A)
 En una segunda terminal, ejecuta, asegurándote de apuntar al host y puerto del Servidor B:
 ```bash
-# Ejemplo: Escuchar en localhost, puerto 8000 y conectar al Servidor B en el puerto 9000
-python3 server_scraping.py -i 127.0.0.1 -p 8000 --processor-host 127.0.0.1 --processor-port 9000
+python3 server_scraping.py -i 0.0.0.0 -p 8000 -w 4 --processor-host 0.0.0.0 --processor-port 9000
 ```
 
 Ambos servidores quedarán corriendo y listos para recibir peticiones.
@@ -98,3 +96,39 @@ Para probar la robustez del sistema con múltiples URLs, puedes usar el script `
     python3 client.py
     ```
 El script procesará cada URL, mostrará un resumen del éxito o fallo de cada una y guardará los resultados JSON detallados en el directorio `results/`.
+
+
+## Testing
+
+Para asegurar la correcta funcionalidad y robustez del sistema, se han implementado pruebas unitarias y de integración utilizando `pytest`.
+
+### Requisitos para las Pruebas
+
+Asegúrate de tener instaladas las dependencias de desarrollo necesarias. Si aún no lo has hecho, ejecuta:
+```bash
+pip install -r requirements.txt
+```
+
+### Ejecución de las Pruebas
+
+Para ejecutar todas las pruebas, abre una terminal en la raíz del proyecto y utiliza `pytest` como módulo de Python:
+
+```bash
+python3 -m pytest
+```
+
+Si deseas ejecutar las pruebas de un módulo específico:
+
+*   **Pruebas del Servidor de Scraping (`test_scraper.py`)**:
+    Estas pruebas verifican el comportamiento del Servidor A, incluyendo la extracción de datos de páginas web y el manejo de diferentes escenarios de URL (éxito, URL faltante, URL inválida). La comunicación con el Servidor B se simula (mockea) para aislar las pruebas del Servidor A.
+    ```bash
+    python3 -m pytest tests/test_scraper.py
+    ```
+
+*   **Pruebas del Servidor de Procesamiento (`test_processor.py`)**:
+    Estas pruebas se centran en la lógica de procesamiento del Servidor B, verificando que las tareas CPU-bound (capturas de pantalla, análisis de rendimiento, procesamiento de imágenes) se ejecuten correctamente y que el servidor maneje los fallos adecuadamente. Las funciones externas se simulan (mockean) para probar la función `processing_task` de forma unitaria.
+    ```bash
+    python3 -m pytest tests/test_processor.py
+    ```
+
+Al ejecutar las pruebas, `pytest` te proporcionará un resumen detallado de los resultados, indicando si todas las pruebas pasaron o si hubo fallos.
