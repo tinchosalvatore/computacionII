@@ -1,56 +1,84 @@
 import base64
-import urllib.request
-from PIL import Image
 import io
+import requests
+from PIL import Image
+from bs4 import BeautifulSoup
+from urllib.parse import urljoin
 
-def process_images(image_urls: list) -> dict:
+def get_image_urls(url: str) -> list:
     """
-    Descarga un número limitado de imágenes de una lista, selecciona las más
-    grandes por área y genera thumbnails codificados en Base64.
+    Obtiene las URLs de las imágenes de una página.
     """
+    try:
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.content, 'html.parser')
+        
+        img_urls = [urljoin(url, img['src']) for img in soup.find_all('img') if img.get('src')]
+        return img_urls
+    except requests.RequestException as e:
+        print(f"[ImageProcessor] Could not fetch image URLs from {url}: {e}")
+        return []
+
+def process(url: str) -> list:
+    """
+    Extrae, descarga y crea thumbnails de las imágenes principales de una URL.
+
+    Args:
+        url: La URL de la página a procesar.
+
+    Returns:
+        Una lista de strings base64 representando los thumbnails.
+    """
+    image_urls = get_image_urls(url)
     if not image_urls:
-        return {"status": "success", "thumbnails": []}
+        return []
 
-    images_with_dims = []
-    # Limitamos el análisis a las primeras 10 imágenes para ser eficientes.
-    for url in image_urls[:10]:
+    images_data = []
+    # Limitamos el análisis a las primeras 20 imágenes para ser eficientes.
+    for img_url in image_urls[:20]:
         try:
             # Descargamos la imagen con un timeout corto.
-            with urllib.request.urlopen(url, timeout=5) as response:
-                img_data = response.read()
-                img = Image.open(io.BytesIO(img_data))
+            img_response = requests.get(img_url, timeout=5)
+            img_response.raise_for_status()
+            img_data = img_response.content
+            
+            # Usamos Pillow para verificar que es una imagen válida y obtener su tamaño
+            with Image.open(io.BytesIO(img_data)) as img:
                 width, height = img.size
-                # Solo consideramos imágenes con un tamaño mínimo para evitar iconos pequeños.
+                # Solo consideramos imágenes con un tamaño mínimo para evitar iconos.
                 if width > 100 and height > 100:
-                    images_with_dims.append({
+                    images_data.append({
                         "area": width * height,
                         "data": img_data
                     })
-        except Exception:
-            # Ignoramos imágenes que no se pueden descargar, abrir o no cumplen el tamaño.
+        except (requests.RequestException, IOError, UnidentifiedImageError) as e:
+            # Ignoramos imágenes que no se pueden descargar o procesar.
+            # print(f"Skipping image {img_url}: {e}")
             continue
 
     # Ordenamos las imágenes por área (de mayor a menor) y tomamos las 3 principales.
-    images_with_dims.sort(key=lambda x: x['area'], reverse=True)
-    main_images_data = [img['data'] for img in images_with_dims[:3]]
+    images_data.sort(key=lambda x: x['area'], reverse=True)
+    main_images_data = [img['data'] for img in images_data[:3]]
 
     thumbnails_base64 = []
     for img_data in main_images_data:
         try:
-            img = Image.open(io.BytesIO(img_data))
-            # Generamos un thumbnail de 128x128 manteniendo el aspect ratio.
-            img.thumbnail((128, 128))
-            
-            # Guardamos el thumbnail en un buffer en memoria en formato PNG.
-            thumb_buffer = io.BytesIO()
-            img.save(thumb_buffer, format="PNG")
-            thumb_bytes = thumb_buffer.getvalue()
-            
-            # Codificamos a Base64 para el JSON.
-            base64_thumb = base64.b64encode(thumb_bytes).decode('utf-8')
-            thumbnails_base64.append(base64_thumb)
-        except Exception:
-            # Si falla la creación del thumbnail, simplemente la omitimos.
+            with Image.open(io.BytesIO(img_data)) as img:
+                # Generamos un thumbnail de 128x128 manteniendo el aspect ratio.
+                img.thumbnail((128, 128))
+                
+                thumb_buffer = io.BytesIO()
+                img.save(thumb_buffer, format="PNG")
+                thumb_bytes = thumb_buffer.getvalue()
+                
+                base64_thumb = base64.b64encode(thumb_bytes).decode('utf-8')
+                thumbnails_base64.append(base64_thumb)
+        except (IOError, UnidentifiedImageError) as e:
+            print(f"Could not create thumbnail: {e}")
             continue
             
-    return {"status": "success", "thumbnails": thumbnails_base64}
+    return thumbnails_base64
+
+# Importamos UnidentifiedImageError para compatibilidad con Pillow >= 9.0
+from PIL import UnidentifiedImageError
